@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 3</title>
+    <style>
+        img {
+            display: block;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <select id="country" onchange="switchImage()">
+            <option >Select</option>
+            <option value="a">America</option>
+            <option value="2">Italy</option>
+            <option value="3">Spain</option>
+            <option value="4">Turky</option>
+            <option value="5">switzerland</option>
+        </select>
+    </div>
+    <br>
+    <img src="images/noImage.png" id="images">
+    <!-- 
+    <img src="images/America.png">
+    <img src="images/Itali.jpeg">
+    <img src="images/spain.png">
+    <img src="images/Turky.jpeg">
+    <img src="images/switzerland.jpeg"> -->
+    <script>
+        function switchImage() {
+            let x = document.getElementById("country").value;
+
+            if (x == 'a') {
+                document.getElementById("images").src = "images/America.png";
+            } else if (x == '2') {
+                document.getElementById("images").src = "images/Itali.jpeg";
+            } else if (x == '3') {
+                document.getElementById("images").src = "images/spain.png";
+            } else if (x == '4') {
+                document.getElementById("images").src = "images/Turky.jpeg";
+            } else {
+                document.getElementById("images").src = "images/switzerland.jpeg";
+            }
+
+
+        }
+    </script>
+
+
+</body>
+
+</html>
