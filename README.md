@@ -1,1 +1,1 @@
-# Java-Script---Orange
+# JavaScript-Orange
