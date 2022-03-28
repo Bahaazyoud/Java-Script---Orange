@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task1</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-image: linear-gradient(223deg, #000000, #7873f5);
+        }
+        
+        label {
+            color: white;
+        }
+        
+        .main,
+        form {
+            display: grid;
+            grid-template-columns: auto;
+            justify-items: center;
+            gap: 50px;
+        }
+        
+        select {
+            color: rgba(255, 255, 255, 0.603)!important;
+            text-align: center !important;
+        }
+        
+        form input::placeholder {
+            color: rgba(255, 255, 255, 0.603);
+            text-align: center;
+        }
+        
+        form input,
+        select {
+            padding: 10px;
+            height: 50px;
+            width: 500px;
+            border-radius: 25px;
+            background: linear-gradient(40deg, #ff6ec4, #7873f5);
+            box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease-out;
+        }
+        
+        .main * {
+            margin-top: 10px;
+        }
+        
+        .container {
+            display: grid;
+            border-radius: 25px;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            margin: 95px auto;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            padding: 30px;
+            gap: 25px;
+        }
+        
+        .file {
+            opacity: 0;
+            width: 0.1px;
+            height: 0.1px;
+            position: absolute;
+        }
+        
+        .lan input {
+            height: 12px;
+            margin: 32px;
+            width: fit-content;
+        }
+        
+        .file-input label {
+            display: block;
+            position: relative;
+            width: 200px;
+            height: 50px;
+            border-radius: 25px;
+            background: linear-gradient(40deg, #ff6ec4, #7873f5);
+            box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease-out;
+        }
+        
+        .file-name {
+            position: absolute;
+            bottom: -35px;
+            left: 10px;
+            font-size: 0.85rem;
+            color: #fff;
+        }
+        
+        input:hover+label,
+        input:focus+label {
+            transform: scale(1.02);
+        }
+        /* Adding an outline to the label on focus */
+        
+        input:focus+label {
+            outline: 1px solid #000;
+            outline: -webkit-focus-ring-color auto 2px;
+        }
+        
+        @media screen and (max-width:500px) {
+            form input,
+            select {
+                width: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <form action="" onchange="checked()">
+            <input type="text" name="name" class="input" placeholder="Enter your name" />
+            <input type="number" name="age" class="input" placeholder="Enter your age" />
+            <select name="gender" class="input">
+        <option class="select" disabled selected>Please select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+             </select>
+            <input type="text" name="discription" class="input" placeholder="Write about yourself" />
+            <input type="text" name="major" class="input" placeholder="Enter your major" />
+            <input type="text" name="university" class="input" placeholder="Enter your university" />
+            <input type="text" name="date of birth" class="input" onfocus="(this.type = 'date')" placeholder="Your date of birth" />
+            <div class="lan">
+
+                <label for="HTML">HTML</label>
+                <input type="checkbox" name="HTML" id="HTML" class="input checkbox" />
+                <label for="css">CSS</label>
+                <input type="checkbox" name="CSS" id="CSS" class="input checkbox" />
+                <label for="JS">JS</label>
+                <input type="checkbox" name="JS" id="JS" class="input checkbox" />
+                <label for="PHP">PHP</label>
+                <input type="checkbox" name="PHP" id="PHP" class="input checkbox" />
+                <label for="C++">C++</label>
+                <input type="checkbox" name="C++" id="C++" class="input checkbox" />
+                <label for="C#">C#</label>
+                <input type="checkbox" name="C#" id="C#" class="input checkbox" />
+            </div>
+            <div class="file-input">
+                <input type="file" id="file" name="Image src" class="file img input">
+                <label for="file">
+          Select file
+          <p class="file-name" ></p>
+        </label>
+            </div>
+            <input type="number" name="number of sibling" class="input" placeholder="How many sibling do you have" />
+            <input type="text" name="sibling disc" class="input" placeholder="Discribe your sibling" />
+            <input type="button" name="create" value="Create" />
+    </div>
+    </form>
+    <script>
+        localStorage.clear();
+        let container = document.createElement("div");
+        document.body.appendChild(container);
+        container.setAttribute("class", "container");
+        let containerDiv = document.getElementsByClassName("container")[0];
+
+        let checkBox = document.getElementsByClassName("checkbox");
+
+        function checked() {
+            for (i = 0; i < checkBox.length; i++) {
+                if (checkBox[i].checked) {
+                    checkBox[i].value = "I love this";
+                } else {
+                    checkBox[i].value = "I don't like it";
+                }
+            }
+        }
+        const file = document.querySelector("#file");
+        file.addEventListener("change", (e) => {
+            const [file] = e.target.files;
+            const {
+                name: fileName,
+                size
+            } = file;
+            const fileSize = (size / 1000).toFixed(2);
+            const fileNameAndSize = `${fileName} - ${fileSize}KB`;
+            document.querySelector(".file-name").textContent = fileNameAndSize;
+        });
+        let img = document.getElementsByClassName("img")[0];
+        let myImg;
+        let create = document.getElementsByName("create")[0];
+        let input = document.getElementsByClassName("input");
+        create.onclick = function() {
+            let myElement;
+            for (i = 0; i < input.length; i++) {
+                localStorage.setItem(input[i].name, input[i].value);
+                myElement = document.createElement("div");
+                myElement.setAttribute("class", "innerDivs");
+                myElement.setAttribute("id", `"innerDiv${i + 1}"`);
+                myElement.innerHTML = `${input[i].name}: ${localStorage.getItem(
+            input[i].name
+        )}`;
+                containerDiv.appendChild(myElement);
+                containerDiv.style.background = "linear-gradient(40deg, #ff6ec4, #7873f5)"
+            }
+            myImg = document.createElement("img");
+            myImg.setAttribute("src", img.value);
+            myImg.setAttribute("alt", "Can't upload photo from the local server");
+            containerDiv.appendChild(myImg);
+        };
+        // console.log(document.getElementsByClassName("input")[0].name)
+    </script>
+</body>
+
+</html>
